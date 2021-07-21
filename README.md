@@ -9,6 +9,4 @@ A simple script for Steam on Linux that will create symlinks to all your compatd
 Be careful with where you output to, since it may potentially create a lot of symlinks.
 
 ## To do:
-The script does not do any housekeeping. If you uninstall a file, the symlink will remain until you delete it.
-
-
+The script does not do any housekeeping. If you uninstall a game, the symlink will remain until you delete it.
