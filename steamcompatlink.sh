@@ -7,7 +7,10 @@ if [ "$#" -eq 0 ]; then
     exit 1
 fi
 
-#TODO, check if arg is dir
+if [ -f "$1" ]; then 
+    echo "Provided argument is not a directory"
+    exit 1
+fi
 
 readarray -t steamdirs < <(cat ~/.steam/steam/steamapps/libraryfolders.vdf | grep "/" | awk '{ print $2  }' | sed s/\"//g)
 
