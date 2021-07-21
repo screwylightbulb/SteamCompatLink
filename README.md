@@ -4,7 +4,7 @@ A simple script for Steam on Linux that will create symlinks to all your compatd
 
 ## Usage:
 
-./steamcompatlink.sh <outputDir>
+./steamcompatlink.sh /home/user/outputDir/etc
 
 Be careful with where you output to, since it may potentially create a lot of symlinks.
 
