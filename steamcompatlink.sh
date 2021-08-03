@@ -12,18 +12,8 @@ if [ -f "$1" ]; then
     exit 1
 fi
 
+steamdirs=("$HOME/.steam/steam")
 readarray -t steamdirs < <(cat ~/.steam/steam/steamapps/libraryfolders.vdf | grep "/" | awk '{ print $2  }' | sed s/\"//g)
-
-
-#these two are exactly the same for most, but eh, can't hurt to check both
-
-if [ -d "$HOME/.steam/steam" ]; then 
-    steamdirs+=("$HOME/.steam/steam")
-fi
-
-if [ -d "$HOME/.local/share/Steam/" ]; then 
-    steamdirs+=("$HOME/.local/share/Steam")
-fi
 
 for dir in "${steamdirs[@]}"
 do
