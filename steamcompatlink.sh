@@ -12,8 +12,8 @@ if [ -f "$1" ]; then
     exit 1
 fi
 
-steamdirs=("$HOME/.steam/steam")
 readarray -t steamdirs < <(cat ~/.steam/steam/steamapps/libraryfolders.vdf | grep "/" | awk '{ print $2  }' | sed s/\"//g)
+steamdirs=("${steamdirs[@]}" "$HOME/.steam/steam")
 
 for dir in "${steamdirs[@]}"
 do
