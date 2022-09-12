@@ -1,15 +1,12 @@
 # SteamCompatLink
 
-A simple script for Steam on Linux that will create symlinks to all your compatdata/<appid>/pfx/drivec/users/steamuser folders to a central folder with the names of the apps instead of IDs.
+A simple script for Steam on Linux that will create symlinks to all your compatdata/<appid>/pfx/drivec/users/steamuser folders to a central folder with the names of the apps instead of IDs. Also should link to your screenshots.
 
 ## Usage:
 
-./steamcompatlink.sh /home/user/outputDir/etc
+./steamcompatlink.sh 
 
-Be careful with where you output to, since it may potentially create a lot of symlinks.
+End result should be a new directory at $HOME/Documents/SteamLinks full of directories matching your installed Steam games. These should contain symlinks to either your Proton userdata, your Steam screenshots, or both.  
 
-## To do / issues:
-  - The script does not do any housekeeping. If you uninstall a game, the symlink will remain until you delete it.
-  - I have not done much work to ensure it works well with directory names that have spaces in them
-  - My bash skills are not great, so I defs need to clean up some of the more goofy parts of the code
+
   
