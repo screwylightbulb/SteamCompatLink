@@ -1,16 +1,8 @@
 #!/bin/sh
 
-if [ "$#" -eq 0 ]; then
-    echo "usage: ./steamcompatlink.sh [destination]"
-    echo "example: ./steamcompatlink.sh ~/MySteamLinks"
-    echo "The destination folder will be filled with symlinks to your compatdata folders"
-    exit 1
-fi
+linksdir="$HOME/Documents/SteamLinks"
 
-if [ -f "$1" ]; then 
-    echo "Provided argument is not a directory"
-    exit 1
-fi
+mkdir -p $linksdir
 
 readarray -t steamdirs < <(cat ~/.steam/steam/steamapps/libraryfolders.vdf | grep "/" | awk '{ print $2  }' | sed s/\"//g)
 steamdirs=("${steamdirs[@]}" "$HOME/.steam/steam")
@@ -23,15 +15,22 @@ do
     do
         appid=$(cat ${appfile} | grep \"appid\" | awk '{ print $2 }' | sed s/\"//g)
         appname=$(cat ${appfile} | grep installdir | awk '{ print $2, $3, $4, $5, $6, $7, $8, $9, $10 }' | sed s/\"//g | sed 's/ *$//g')
-        #echo "${appid} :: ${appname}"
         compatdir="${dir}/steamapps/compatdata/${appid}/pfx/drive_c/users/steamuser/"
+        userid=$(ls -at $HOME/.steam/steam/userdata | tail -n +2 | head -n 1)
+        screenshotdir="$HOME/.steam/steam/userdata/${userid}/760/remote/${appid}/screenshots"
+
+        mkdir -p "${linksdir}/${appname}"
 
         if [ -d "${compatdir}" ] 
         then
-            echo "${compatdir}"
-            ln -sfn "${compatdir}" "$1/${appname}"
+            ln -sfn "${compatdir}" "${linksdir}/${appname}/UserFiles"
         fi
+
+        if [ -d "${screenshotdir}" ] 
+        then
+            ln -sfn "${screenshotdir}" "${linksdir}/${appname}/Screenshots"
+        fi
+
     done
 done
-
 
